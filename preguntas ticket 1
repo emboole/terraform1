@@ -1,0 +1,51 @@
+Resource: Es una instancia de un servicio o servidor en la nube que va a ser creado por terraform.
+Ejemplos: ec2, buckets de s3, VPC
+
+Variable: Valores de entrada que sirven para customizar tus módulos de terraform sin que tengas que hardcodear código dentro de los mismos, lo cual los hace (más) reutilizables
+
+ejemplo:
+
+# esto en variables.tf
+variable "image_id" {
+  type = string
+  default = ["ami-123abc"]
+}
+
+# esto en main.tf
+
+resource "aws_instance" "example" {
+  instance_type = "t2.micro"
+  ami           = var.image_id #### ahí está el chiste
+}
+
+Data source: 
+- Con los Data Sources se puede obtener información de un recurso que está fuera de Terraform (como por ejemplo una AMI de AWS) y luego aprovisionar un resource.
+
+Ejemplo: obtengo datos de la última AMI sobre Amazon Linux, y desde un resource uso ese dato para crear un EC2.
+
+
+
+--------
+Outputs:
+- Los valores de output generan info sobre tu infraestructura (ya levantada).
+- Para obtener esta información se le hace un query al recurso.
+- Los valores pueden compartirse con otras configuraciones de .tf
+
+duda: solo se puede usar con la command line?
+respuesta: no
+
+Ejemplo
+
+output "instance_ip_addr" {
+  value = aws_instance.server.private_ip
+}
+
+en la cli haces: terraform output instance_ip_addr
+y te devuelve el IP.
+
+
+
+is it possible to optionally create a resource? How?
+Si es posible. Se pueden crear opcionalmente con ciertas condiciones.
+
+Ejemplo: count con una condicion ternaria

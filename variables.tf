@@ -1,12 +1,8 @@
 variable "tags" {
-  type = list(object({
-    vpc_name = string
-    private_zone_name = string
-  }))
-  default = [
-    {
-      vpc_name = "testn"
-      private_zone_name = "hosted_testn"
-    }
-  ]
+  type = map(string)
+  description = "Resource tags"
+  default = {
+    vpc_name = "testn"
+    private_zone_name = "hosted_testn"    
+  }
 }
