@@ -17,3 +17,21 @@ variable "bucket_tags" {
     type = string
     default = "backend-storing"
 }
+
+variable "subnets_az" {
+  type = map(string)
+  description = "Subnet AZ"
+  default = {
+    az_1 = "us-east-1a"
+    az_2 = "us-east-1b"    
+  }
+}
+
+variable "subnets_tags" {
+  type = map(string)
+  description = "Subnet tags"
+  default = {
+    public = "Public Subnet"
+    private = "Private Subnet"    
+  }
+}

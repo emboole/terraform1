@@ -1,7 +1,7 @@
 resource "aws_route53_zone" "private" {
   name = "testn.internal"
   tags = {
-    Name = var.tags_hz.private_zone_name
+    Name = var.tags_hz.private_zone_name #esto no deberia estar en tags
   }
 
   vpc {
@@ -9,11 +9,12 @@ resource "aws_route53_zone" "private" {
   }
 }
 
-resource "aws_vpc" "testn" {
-  cidr_block       = "10.0.0.0/16"
-  instance_tenancy = "default"
+# i'm guessing that this is fruit
+# resource "aws_vpc_dhcp_options" "testn_dhcp" {
+#   domain_name          = "testn.internal"
+#   domain_name_servers  = ["10.0.0.0", "10.0.1.0"] 
 
-  tags = {
-    Name = var.tags_hz.vpc_name
-  }
-}
+#   tags = {
+#     Name = "testn_dhcp"
+#   }
+# }
