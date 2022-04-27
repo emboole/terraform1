@@ -1,70 +1,91 @@
-/* VPC */
-resource "aws_vpc" "testn" {
-  cidr_block       = "10.0.0.0/16"
-  instance_tenancy = "default"
+# /* VPC */
+# resource "aws_vpc" "testn" {
+#   cidr_block       = "10.0.0.0/16"
+#   instance_tenancy = "default"
+#   enable_dns_hostnames = true # servira para resolver la zona dns?
 
-  tags = {
-    Name = var.tags_hz.vpc_name
-  }
-}
+#   tags = {
+#     Name = var.tags_hz.vpc_name
+#   }
+# }
 
-/* PUBLIC SUBNET & ASSOCIATIONS*/
-resource "aws_subnet" "public" {
-  vpc_id     = aws_vpc.testn.id
-  cidr_block = "10.0.0.0/24"
-  availability_zone = var.subnets_az.az_1
+# # /* VPC Endpoints */
 
-  tags = {
-    Name = var.subnets_tags.public
-  }
-}
+# resource "aws_vpc_endpoint" "s3" {
+#   vpc_id       = aws_vpc.testn.id
+#   service_name = "com.amazonaws.us-east-1.s3"
 
-resource "aws_route_table" "testn_vpc_public_route_table" {
-    vpc_id = aws_vpc.testn.id
+#   tags = {
+#     Environment = "S3 VPC Endpoint"
+#   }
+# }
 
-    route {
-        cidr_block = "0.0.0.0/0"
-        gateway_id = aws_internet_gateway.testn_igw.id
-    }
+# resource "aws_vpc_endpoint" "dynamodb" {
+#   vpc_id       = aws_vpc.testn.id
+#   service_name = "com.amazonaws.us-east-1.dynamodb"
 
-    tags = {
-        Name = "Public Subnet Route Table."
-    }
-}
+#   tags = {
+#     Environment = "DynamoDB VPC Endpoint"
+#   }
+# }
 
-resource "aws_route_table_association" "testn_vpc_public_route_table_association" {
-    subnet_id = aws_subnet.public.id
-    route_table_id = aws_route_table.testn_vpc_public_route_table.id
-}
+# /* PUBLIC SUBNET & ASSOCIATIONS*/
+# resource "aws_subnet" "public" {
+#   vpc_id     = aws_vpc.testn.id
+#   cidr_block = "10.0.0.0/24"
+#   availability_zone = var.subnets_az.az_1
 
-resource "aws_internet_gateway" "testn_igw" {
-  vpc_id = aws_vpc.testn.id
+#   tags = {
+#     Name = var.subnets_tags.public
+#   }
+# }
 
-  tags = {
-    Name = "Testn IGW"
-  }
-}
+# resource "aws_route_table" "testn_vpc_public_route_table" {
+#     vpc_id = aws_vpc.testn.id
 
-/* PRIVATE SUBNET & ASSOCIATIONS*/
-resource "aws_subnet" "private" {
-  vpc_id     = aws_vpc.testn.id
-  cidr_block = "10.0.1.0/24"
-  availability_zone = var.subnets_az.az_2
+#     route {
+#         cidr_block = "0.0.0.0/0"
+#         gateway_id = aws_internet_gateway.testn_igw.id
+#     }
 
-  tags = {
-    Name = var.subnets_tags.private
-  }
-}
+#     tags = {
+#         Name = "Public Subnet Route Table."
+#     }
+# }
 
-/* Routing table for private subnet */
-resource "aws_route_table" "testn_vpc_private_route_table" {
-  vpc_id = aws_vpc.testn.id
-    tags = {
-        Name = "Private Subnet Route Table."
-    }
-}
+# resource "aws_route_table_association" "testn_vpc_public_route_table_association" {
+#     subnet_id = aws_subnet.public.id
+#     route_table_id = aws_route_table.testn_vpc_public_route_table.id
+# }
 
-resource "aws_route_table_association" "testn_vpc_privae_route_table_association" {
-    subnet_id = aws_subnet.private.id
-    route_table_id = aws_route_table.testn_vpc_private_route_table.id
-}
+# resource "aws_internet_gateway" "testn_igw" {
+#   vpc_id = aws_vpc.testn.id
+
+#   tags = {
+#     Name = "Testn IGW"
+#   }
+# }
+
+# /* PRIVATE SUBNET & ASSOCIATIONS*/
+# resource "aws_subnet" "private" {
+#   vpc_id     = aws_vpc.testn.id
+#   cidr_block = "10.0.1.0/24"
+#   availability_zone = var.subnets_az.az_2
+
+#   tags = {
+#     Name = var.subnets_tags.private
+#   }
+# }
+
+# /* Routing table for private subnet */
+# resource "aws_route_table" "testn_vpc_private_route_table" {
+#   vpc_id = aws_vpc.testn.id
+#     tags = {
+#         Name = "Private Subnet Route Table."
+#     }
+# }
+
+# resource "aws_route_table_association" "testn_vpc_privae_route_table_association" {
+#     subnet_id = aws_subnet.private.id
+#     route_table_id = aws_route_table.testn_vpc_private_route_table.id
+# }

@@ -5,7 +5,8 @@ resource "aws_route53_zone" "private" {
   }
 
   vpc {
-    vpc_id = aws_vpc.testn.id
+    # vpc_id = aws_vpc.testn.id
+    vpc_id = module.vpc.vpc_id
   }
 }
 
