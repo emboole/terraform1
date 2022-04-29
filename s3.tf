@@ -7,18 +7,18 @@
 #     }
 #   }
 
-resource "aws_s3_bucket" "bucketn" {
-    bucket = var.bucket_name
-    acl    = "private"
+# resource "aws_s3_bucket" "bucketn" {
+#     bucket = var.bucket_name
+#     acl    = "private"
 
-    versioning {
-        enabled = true
-    }
+#     versioning {
+#         enabled = true
+#     }
 
-    tags = {
-        Name = var.bucket_tags
-    }
-}
+#     tags = {
+#         Name = var.bucket_tags
+#     }
+# }
 
 # resource "aws_s3_bucket" "bucket_asg" {
 #     bucket = var.bucket_asg_name
