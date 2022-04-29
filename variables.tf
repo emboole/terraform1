@@ -13,6 +13,12 @@ variable "bucket_name" {
   default = "terraform-onboarding-bucketn-tfstate"
 }
 
+variable "bucket_asg_name" {
+  type = string
+  description = "Bucket name"
+  default = "terraform-onboarding-bucketn-asg"
+}
+
 variable "bucket_tags" {
     type = string
     default = "backend-storing"
