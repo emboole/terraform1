@@ -73,7 +73,8 @@ data "aws_iam_policy_document" "ec2_to_bucket_asg_policy_document" {
     ]
 
     resources = [
-      "${aws_s3_bucket.bucket_asg.arn}/*",
+      aws_s3_bucket.bucket_asg.arn,
+      # "${aws_s3_bucket.bucket_asg.arn}/*",
     ]
   }
 
