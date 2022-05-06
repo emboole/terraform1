@@ -31,7 +31,7 @@ resource "aws_s3_bucket" "bucket_asg" {
 
 resource "aws_iam_role" "ec2_to_bucket_asg" {
   name                = "ec2_to_bucket_asg"
-  assume_role_policy = data.aws_iam_policy_document.ec2_to_bucket_asg_policy_document.json
+  assume_role_policy = data.aws_iam_policy_document.ec2_to_bucket_asg.json
 }
 
 resource "aws_iam_instance_profile" "ec2_to_bucket" {
@@ -63,7 +63,7 @@ resource "aws_iam_instance_profile" "ec2_to_bucket" {
 
 
 # policy document
-data "aws_iam_policy_document" "ec2_to_bucket_asg_policy_document" {
+data "aws_iam_policy_document" "ec2_to_bucket_asg" {
   statement {
     sid = "1"
 
@@ -73,8 +73,7 @@ data "aws_iam_policy_document" "ec2_to_bucket_asg_policy_document" {
     ]
 
     resources = [
-      aws_s3_bucket.bucket_asg.arn,
-      # "${aws_s3_bucket.bucket_asg.arn}/*",
+      "${aws_s3_bucket.bucket_asg.arn}/*",
     ]
   }
 
@@ -90,10 +89,10 @@ data "aws_iam_policy_document" "ec2_to_bucket_asg_policy_document" {
 }
 
 # Aparentemente, no es necesario crear una policy si usas un policy_document y lo asignas al role
-# resource "aws_iam_policy" "ec2_to_bucket_asg_policy" {
-#   name   = "ec2_to_bucket_asg_policy"
+# resource "aws_iam_policy" "ec2_to_bucket_asg" {
+#   name   = "ec2_to_bucket_asg"
 #   path   = "/"
-#   policy = data.aws_iam_policy_document.ec2_to_bucket_asg_policy_document.json
+#   policy = data.aws_iam_policy_document.ec2_to_bucket_asg.json
 # }
 
 # S3 VPC Endpoint

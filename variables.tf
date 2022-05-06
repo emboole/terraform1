@@ -2,8 +2,8 @@ variable "tags_hz" {
   type = map(string)
   description = "Resource tags"
   default = {
-    vpc_name = "testn"
-    private_zone_name = "hosted_testn"    
+    vpc_name = "cjove"
+    private_zone_name = "hosted_cjove"    
   }
 }
 
