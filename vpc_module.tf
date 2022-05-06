@@ -1,7 +1,7 @@
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
-  name = "testn"
+  name = "cjove"
   cidr = "10.0.0.0/16"
 
   azs             = [var.subnets_az.az_1, var.subnets_az.az_2]
