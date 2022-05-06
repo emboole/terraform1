@@ -77,15 +77,15 @@ data "aws_iam_policy_document" "ec2_to_bucket_asg_policy_document" {
     ]
   }
 
-  # statement {
-  #   actions = [
-  #     "s3:ListBucket",
-  #   ]
+  statement {
+    actions = [
+      "s3:ListBucket",
+    ]
 
-  #   resources = [
-  #     "${aws_s3_bucket.bucket_asg.arn}",
-  #   ]
-  # }
+    resources = [
+      "${aws_s3_bucket.bucket_asg.arn}",
+    ]
+  }
 }
 
 # Aparentemente, no es necesario crear una policy si usas un policy_document y lo asignas al role
