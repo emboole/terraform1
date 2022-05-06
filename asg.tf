@@ -3,6 +3,9 @@ resource "aws_launch_template" "ec2_testn" {
   image_id      = "ami-0f9fc25dd2506cf6d"
   instance_type = "t2.micro"
   security_group_names = [aws_security_group.allow_80.name]
+  iam_instance_profile {
+    name = aws_iam_instance_profile.ec2_to_bucket.name
+  }
 
   block_device_mappings {
     device_name = "/dev/sda1"
@@ -11,6 +14,8 @@ resource "aws_launch_template" "ec2_testn" {
       kms_key_id = aws_kms_key.testn_key.arn
     }
   }
+
+  user_data = filebase64("bootstraps/bootstrap.sh")
 }
 
 resource "aws_autoscaling_group" "asg_testn" {
