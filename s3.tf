@@ -88,6 +88,28 @@ data "aws_iam_policy_document" "ec2_to_bucket_asg" {
   }
 }
 
+# Policy document para asumir rol
+data "aws_iam_policy_document" "event_stream_bucket_role_assume_role_policy" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["firehose.amazonaws.com"]
+    }
+
+    principals {
+      type        = "AWS"
+      identifiers = [var.trusted_role_arn]
+    }
+
+    principals {
+      type        = "Federated"
+      identifiers = ["arn:aws:iam::${var.account_id}:saml-provider/${var.provider_name}", "cognito-identity.amazonaws.com"]
+    }
+  }
+}
+
 # Aparentemente, no es necesario crear una policy si usas un policy_document y lo asignas al role
 # resource "aws_iam_policy" "ec2_to_bucket_asg" {
 #   name   = "ec2_to_bucket_asg"
