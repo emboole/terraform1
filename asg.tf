@@ -1,5 +1,5 @@
-resource "aws_launch_template" "ec2_cjove" {
-  name_prefix   = "ec2_cjove"
+resource "aws_launch_template" "ec2_nberne" {
+  name_prefix   = "ec2_nberne"
   image_id      = "ami-0f9fc25dd2506cf6d"
   instance_type = "t2.micro"
   security_group_names = [aws_security_group.allow_80.name]
@@ -11,21 +11,21 @@ resource "aws_launch_template" "ec2_cjove" {
     device_name = "/dev/sda1"
 
     ebs {
-      kms_key_id = aws_kms_key.cjove_key.arn
+      kms_key_id = aws_kms_key.nberne_key.arn
     }
   }
 
   user_data = filebase64("bootstraps/bootstrap.sh")
 }
 
-resource "aws_autoscaling_group" "asg_cjove" {
+resource "aws_autoscaling_group" "asg_nberne" {
   availability_zones = ["us-east-1a"]
   desired_capacity   = 1
   max_size           = 1
   min_size           = 1
 
   launch_template {
-    id      = aws_launch_template.ec2_cjove.id
+    id      = aws_launch_template.ec2_nberne.id
     version = "$Latest"
   }
 }
@@ -57,7 +57,7 @@ resource "aws_security_group" "allow_80" {
   }
 }
 
-resource "aws_kms_key" "cjove_key" {
+resource "aws_kms_key" "nberne_key" {
   description             = "KMS key 1"
   deletion_window_in_days = 10
 }

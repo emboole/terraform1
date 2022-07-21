@@ -16,7 +16,7 @@ variable "bucket_name" {
 variable "bucket_asg_name" {
   type = string
   description = "Bucket name"
-  default = "terraform-onboarding-bucketn-asg"
+  default = "terraform-onboarding-bucketn-aguante"
 }
 
 variable "bucket_tags" {
