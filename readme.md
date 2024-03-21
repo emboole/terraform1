@@ -1,4 +1,4 @@
-# Index
+# Table of contents
 
 - [Secure Data Migration with CloudFront Access - S3Migrator-CloudFront.yaml](#secure-data-migration-with-cloudfront-access---s3migrator-cloudfrontyaml)
 - [Secure Data Migration - S3Migrator.yaml](#secure-data-migration---s3migratoryaml)
