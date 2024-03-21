@@ -5,6 +5,8 @@
 - [CloudFront Distribution Configuration for S3 Bucket - CloudFront-Enforcer.yaml](#cloudfront-distribution-configuration-for-s3-bucket---cloudfront-enforceryaml)
 - [S3 Bucket Metrics Retrieval Script - BucketSize.py](#s3-bucket-metrics-retrieval-script---bucketsizepy)
 
+---
+
 # Secure Data Migration with CloudFront Access - S3Migrator-CloudFront.yaml
 
 This CloudFormation template sets up a secure data migration process from a source S3 bucket to a destination bucket. It ensures exclusive access to the destination bucket via CloudFront and disables both public and static website hosting on the source bucket.
@@ -134,6 +136,8 @@ This method offers an alternative to Service Catalog, providing direct deploymen
 1. Verify that data migration to the destination S3 bucket was successful.
 2. Test the CloudFront distribution to ensure it's serving content correctly.
 
+---
+
 # Secure Data Migration - S3Migrator.yaml
 
 This Service Catalog product provides a secure process for migrating data from one S3 bucket to another. It ensures that the destination bucket is created and configured correctly, and public access is disabled on the source bucket to secure the data during the migration process.
@@ -259,6 +263,8 @@ This method offers an alternative to Service Catalog, providing direct deploymen
 
 1. Verify that data migration to the destination S3 bucket was successful.
 2. Test the CloudFront distribution to ensure it's serving content correctly.
+
+---
 
 # CloudFront Distribution Configuration for S3 Bucket - CloudFront-Enforcer.yaml
 
@@ -389,6 +395,8 @@ This method offers an alternative to Service Catalog, providing direct deploymen
 1. Verify that data migration to the destination S3 bucket was successful.
 2. Test the CloudFront distribution to ensure it's serving content correctly.
 
+---
+
 # S3 Bucket Metrics Retrieval Script - BucketSize.py
 
 Python script that retrieves the total size and number of objects in an Amazon S3 bucket using CloudWatch Metrics, without querying the bucket directly.
@@ -400,7 +408,7 @@ Before running this script, ensure you have the following:
 - Python 3 installed.
 - AWS CLI configured with at least one profile.
 - Boto3 installed. You can install it using pip:
-  
+
   ```
   pip install boto3
   ```
